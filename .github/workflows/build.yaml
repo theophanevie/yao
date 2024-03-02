@@ -2,7 +2,7 @@ name: Build docker
 
 on:
   push:
-    branches: ['NEVER']
+    branches: ['master']
 
 env:
   REGISTRY: ghcr.io
