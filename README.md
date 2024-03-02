@@ -4,6 +4,10 @@ Metaverse implementation of the most amazing dog !
 
 # Patch note
 
+## 1.0.2
+
+- Fix error message
+
 ## 1.0.1
 
 - Misc typing fix
