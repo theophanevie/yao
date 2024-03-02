@@ -4,6 +4,9 @@ on:
   push:
     branches: ['master']
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push-image:
@@ -39,6 +42,8 @@ jobs:
 
   deploy:
       name: Deploy
+      needs:
+        - build-and-push-image
       runs-on: ubuntu-latest
       steps:
         - name: Set the Kubernetes context
