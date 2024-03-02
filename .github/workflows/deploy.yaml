@@ -34,4 +34,4 @@ jobs:
           shell: bash
           run: |
             helm dependency update . 
-            helm upgrade --install yao . --set "secrets.CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}"
+            helm upgrade --install yao . --set "secret.CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}"
