@@ -4,7 +4,7 @@ RUN pip install poetry
 
 ENV PYTHONUNBUFFERED=1
 
-COPY src/ src
+COPY yao/ yao
 COPY poetry.lock .
 COPY pyproject.toml .
 
