@@ -23,4 +23,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: theophanevie/yao:latest
+          tags: ghcr.io/theophanevie/yao:latest
