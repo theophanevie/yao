@@ -33,5 +33,6 @@ jobs:
         - name: Helm upgrade
           shell: bash
           run: |
+            cd chart
             helm dependency update . 
             helm upgrade --install yao . --set "secret.CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}"
