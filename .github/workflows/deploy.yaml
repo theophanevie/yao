@@ -46,12 +46,12 @@ jobs:
         - build-and-push-image
       runs-on: ubuntu-latest
       steps:
-        - uses: butlerlogic/action-autotag@1.0.0
+        - name: Bump version and push tag
+          uses: anothrNick/github-tag-action@1.64.0
           env:
-            GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          with:
-            root: "pyproject.toml"
-            regex_pattern: 'version = \"([0-9\.]+)\"'
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            INITIAL_VERSION: 1.0.2
+            PRERELEASE: true
 
         - name: Set the Kubernetes context
           uses: azure/k8s-set-context@v2
