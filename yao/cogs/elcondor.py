@@ -80,7 +80,7 @@ class ElCondor(commands.Cog):
     async def on_reaction_add(self, reaction: Reaction, _: User) -> None:
         if reaction.me:
             return
-        await reaction.message.add_reaction(f"{reaction.emoji}")
+        await reaction.message.add_reaction(reaction.emoji)
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member: Member, _: VoiceState, after: VoiceState) -> None:
