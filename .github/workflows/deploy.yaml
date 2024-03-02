@@ -3,7 +3,6 @@ name: Deploy to lenuage cluster
 on:
   push:
     branches: [ 'master' ]
-
 #  workflow_run:
 #    workflows: ["Build docker"]
 #    branches: ["master"]
