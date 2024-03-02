@@ -1,5 +1,7 @@
 FROM python:3.11-bookworm
 
+RUN apt update && apt-get install -y ffmpeg
+
 RUN pip install poetry
 
 ENV PYTHONUNBUFFERED=1
