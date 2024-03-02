@@ -4,13 +4,11 @@ from asyncio import gather
 
 import youtube_dl
 from discord import (
-    Client,
     FFmpegPCMAudio,
     Member,
     PCMVolumeTransformer,
     Reaction,
     User,
-    VoiceChannel,
     VoiceClient,
     VoiceState,
 )
@@ -64,16 +62,6 @@ class YTDLSource(PCMVolumeTransformer):
         return cls(FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
 
 
-async def connect_to_voice_channel(voice_channel: VoiceChannel, guild_name: str, client: Client) -> VoiceClient:
-    for vc in client.voice_clients:
-        if vc.guild.name == guild_name:
-            await vc.disconnect(force=True)
-
-    voice_client: VoiceClient = await voice_channel.connect()
-
-    return voice_client
-
-
 class ElCondor(commands.Cog):
     def __init__(self, bot) -> None:
         self.bot = bot
@@ -97,12 +85,17 @@ class ElCondor(commands.Cog):
         if member == self.bot.user or after.channel is None:
             return
 
-        voice_client: VoiceClient = await connect_to_voice_channel(after.channel, member.guild.name, self.bot)
+        for vc in self.bot.voice_clients:
+            if vc.guild.name == member.guild.name:
+                await vc.disconnect(force=False)
+
+        voice_client: VoiceClient = await after.channel.connect()
+
         player = await YTDLSource.from_url(TUDUDU_URL)
         voice_client.play(player, after=lambda e: print(f'Player error: {e}') if e else None)
 
         while voice_client.is_playing():
             await asyncio.sleep(1)
 
-        await voice_client.disconnect(force=True)
+        await voice_client.disconnect(force=False)
 
