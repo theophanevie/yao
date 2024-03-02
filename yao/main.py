@@ -32,4 +32,4 @@ class DiscordBot(commands.Bot):
 
 if __name__ == "__main__":
     bot = DiscordBot()
-    bot.run(CLIENT_SECRET)
+    bot.run(str(CLIENT_SECRET))

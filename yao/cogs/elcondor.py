@@ -1,6 +1,7 @@
 import asyncio
 import logging
 from asyncio import gather
+from typing import Any
 
 import youtube_dl
 from discord import (
@@ -45,7 +46,8 @@ class YTDLSource(PCMVolumeTransformer):
     """
     from: https://github.com/Rapptz/discord.py/blob/master/examples/basic_voice.py
     """
-    def __init__(self, source, *, data, volume=0.5):
+
+    def __init__(self, source: Any, *, data: dict[Any, Any], volume: float = 0.45) -> None:
         super().__init__(source, volume)
 
         self.data = data
@@ -54,7 +56,7 @@ class YTDLSource(PCMVolumeTransformer):
         self.url = data.get('url')
 
     @classmethod
-    async def from_url(cls, url):
+    async def from_url(cls, url: str) -> 'YTDLSource':
         loop = asyncio.get_event_loop()
         data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=False))
 
@@ -63,7 +65,7 @@ class YTDLSource(PCMVolumeTransformer):
 
 
 class ElCondor(commands.Cog):
-    def __init__(self, bot) -> None:
+    def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
         logger.info("ElCondor cog loaded")
 
@@ -98,4 +100,3 @@ class ElCondor(commands.Cog):
             await asyncio.sleep(1)
 
         await voice_client.disconnect(force=False)
-

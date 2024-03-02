@@ -11,7 +11,7 @@ logger = logging.getLogger("discord.cogs.legacy")
 
 
 class Legacy(commands.Cog):
-    def __init__(self, bot) -> None:
+    def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
         logger.info("Legacy cog loaded")
 

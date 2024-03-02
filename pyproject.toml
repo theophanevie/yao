@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "yao"
-version = "0.2.0"
+version = "1.0.1"
 description = "An implementation coming right from metaverse of the most amazing dog"
 authors = ["THhéophane Vié <theophane.vie@petit-nuage.org>"]
 
@@ -12,6 +12,7 @@ discord-py = {extras = ["voice"], version = "^2.3.2"}
 
 [tool.poetry.dev-dependencies]
 ruff = "^0.3.0"
+mypy = "^1.7.1"
 
 [tool.ruff]
 ignore = ["F503", "E203"]
@@ -22,6 +23,12 @@ extend-select = [
   "C", # complex-structure
 ]
 line-length = 120
+
+[tool.mypy]
+ignore_missing_imports = true
+strict=true
+exclude = ["__pycache__", "venv",]
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
