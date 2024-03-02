@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: yao
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 100%
+  selector:
+    matchLabels:
+      app: yao
+  template:
+    metadata:
+      labels:
+        app: yao
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+    spec:
+      containers:
+        - name: yao
+          image: {{ .Values.image }}
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "25m"
+              memory: "100Mi"
+            limits:
+              cpu: "25m"
+              memory: "100Mi"
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-config
+      imagePullSecrets:
+      - name: {{ .Release.Name }}-gitlab-read-registry
