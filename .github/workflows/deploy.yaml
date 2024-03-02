@@ -34,4 +34,7 @@ jobs:
           run: |
             cd chart
             helm dependency update . 
-            helm upgrade --install yao . --set "secret.CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}"
+            helm upgrade --install yao . --set "secret.CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" \
+              --set "registry_creds.registry=ghcr.io" \
+              --set "registry_creds.username=read-registry" \
+              --set "registry_creds.password=${{ secrets.REGISTRY_TOKEN }}"

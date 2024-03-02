@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: yao
-          image: {{ .Values.image }}
+          image: ghcr.io/theophanevie/yao:master
           imagePullPolicy: Always
           resources:
             requests:
