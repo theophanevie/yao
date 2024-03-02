@@ -1,0 +1,37 @@
+name: Deploy to lenuage
+
+on:
+  push:
+    branches: [ 'master' ]
+
+#  workflow_run:
+#    workflows: ["Build docker"]
+#    branches: ["master"]
+#    types:
+#      - completed
+
+jobs:
+
+  deploy:
+      name: Deploy
+      runs-on: ubuntu-latest
+      steps:
+        - name: Set the Kubernetes context
+          uses: azure/k8s-set-context@v2
+          with:
+            method: service-account
+            k8s-url: ${{ secrets.KUBERNETES_URL }}
+            k8s-secret: ${{ secrets.KUBERNETES_SECRET }}
+
+        - name: Checkout source code
+          uses: actions/checkout@v3
+
+        - uses: azure/setup-helm@v3.5
+          with:
+             version: '3.14.1'
+
+        - name: Helm upgrade
+          shell: bash
+          run: |
+            helm dependency update . 
+            helm upgrade --install yao . --set "secrets.CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}"

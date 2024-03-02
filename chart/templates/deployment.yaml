@@ -33,7 +33,7 @@ spec:
               cpu: "25m"
               memory: "100Mi"
           envFrom:
-            - configMapRef:
-                name: {{ .Release.Name }}-config
+          - secretRef:
+              name: {{ .Release.Name }}-secret
       imagePullSecrets:
-      - name: {{ .Release.Name }}-gitlab-read-registry
+      - name: {{ .Release.Name }}-read-registry
