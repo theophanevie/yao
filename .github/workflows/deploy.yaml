@@ -42,8 +42,8 @@ jobs:
 
   deploy:
       name: Deploy
-#      needs:
-#        - build-and-push-image
+      needs:
+        - build-and-push-image
       runs-on: ubuntu-latest
       steps:
         - name: Checkout source code
@@ -56,7 +56,6 @@ jobs:
             github_token: ${{ secrets.GITHUB_TOKEN }}
             default_bump: false
             tag_prefix: ""
-            dry_run: true
 
         - name: Set the Kubernetes context
           uses: azure/k8s-set-context@v2
