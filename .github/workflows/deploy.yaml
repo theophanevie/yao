@@ -1,4 +1,4 @@
-name: Deploy to lenuage
+name: Deploy to lenuage cluster
 
 on:
   push:
