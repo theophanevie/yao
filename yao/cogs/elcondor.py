@@ -16,7 +16,7 @@ from discord import (
 from discord.ext import commands
 from discord.ext.commands import Context
 
-from yao.settings import GIGUE_URL, TUDUDU_URL
+from yao.settings import GIGUE_URL, TUDUDU_URL, EAZHI_USER_ID
 
 youtube_dl.utils.bug_reports_message = lambda: ''
 logger = logging.getLogger("discord.cogs.elcondor")
@@ -80,7 +80,9 @@ class ElCondor(commands.Cog):
     async def on_reaction_add(self, reaction: Reaction, _: User) -> None:
         if reaction.me:
             return
-        await reaction.message.add_reaction(reaction.emoji)
+        # Because I mean, you can control your individuality, right ?
+        if reaction.message.author.id == EAZHI_USER_ID:
+            await reaction.message.add_reaction(reaction.emoji)
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member: Member, _: VoiceState, after: VoiceState) -> None:
