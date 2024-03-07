@@ -77,11 +77,11 @@ class ElCondor(commands.Cog):
         )
 
     @commands.Cog.listener()
-    async def on_reaction_add(self, reaction: Reaction, _: User) -> None:
+    async def on_reaction_add(self, reaction: Reaction, user: User) -> None:
         if reaction.me:
             return
         # Because I mean, you can control your individuality, right ?
-        if reaction.message.author.id == EAZHI_USER_ID:
+        if user.id == EAZHI_USER_ID:
             await reaction.message.add_reaction(reaction.emoji)
 
     @commands.Cog.listener()
