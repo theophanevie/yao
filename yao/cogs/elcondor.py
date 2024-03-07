@@ -83,6 +83,7 @@ class ElCondor(commands.Cog):
         # Because I mean, you can control your individuality, right ?
         if user.id == EAZHI_USER_ID:
             await reaction.message.add_reaction(reaction.emoji)
+            await reaction.remove(user)
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member: Member, _: VoiceState, after: VoiceState) -> None:
