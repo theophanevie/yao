@@ -18,8 +18,8 @@ spec:
     metadata:
       labels:
         app: yao
-      annotations:
-        rollme: {{ randAlphaNum 5 | quote }}
+{{/*      annotations: TODO: fix with argo diff */}}
+{{/*        rollme: {{ randAlphaNum 5 | quote }}*/}}
     spec:
       containers:
         - name: yao
@@ -34,6 +34,6 @@ spec:
               memory: "500Mi"
           envFrom:
           - secretRef:
-              name: {{ .Release.Name }}-secret
+              name: yao-secret
       imagePullSecrets:
-      - name: {{ .Release.Name }}-read-registry
+      - name: yao-read-registry

@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: {{ .Release.Name }}-read-registry
-data:
-  .dockerconfigjson: {{ printf "{\n\t\"auths\": {\n\t\t\"%s\": {\n\t\t\t\"auth\": \"%s\"\n\t\t}\n\t}\n}\n" .Values.registry_creds.registry (printf "%s:%s" .Values.registry_creds.username .Values.registry_creds.password | b64enc) | b64enc }}
-type: kubernetes.io/dockerconfigjson
