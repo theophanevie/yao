@@ -27,7 +27,7 @@ class DiscordBot(commands.Bot):
         await self.process_commands(message)
 
     async def on_ready(self) -> None:
-        logger.info("Bot ready !")
+        logger.info("Bot is ready !")
 
 
 if __name__ == "__main__":
