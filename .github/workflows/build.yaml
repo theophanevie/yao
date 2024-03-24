@@ -41,8 +41,6 @@ jobs:
       - name: debug-checkout
         run: |
           git tag --list
-          git fetch --prune --unshallow --tags
-          git tag --list
 
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
