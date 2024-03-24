@@ -9,38 +9,23 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  auto-tag:
+  build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      packages: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Bump version and push tag
-        id: tag_version
+        id: autotag
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           default_bump: false
           tag_prefix: ""
-
-  build-and-push-image:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: debug-checkout
-        run: |
-          git tag --list
 
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
@@ -55,7 +40,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=semver,priority=900,pattern={{version}}
+            type=semver,priority=900,pattern={{version}},value=${{ steps.autotag.outputs.new_tag }}
             type=ref,priority=600,event=branch
 
       - name: Build and push Docker image
