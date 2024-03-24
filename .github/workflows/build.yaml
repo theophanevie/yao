@@ -34,12 +34,6 @@ jobs:
           default_bump: false
           tag_prefix: ""
 
-      - name: Set tag
-        id: set_tag
-        run: |
-          TAG=${{ steps.tag_version.outputs.new_tag }}
-          echo "::set-output name=value::${USER_INPUT:-"master"}"
-
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
@@ -55,5 +49,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.set_tag.outputs.value}}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
