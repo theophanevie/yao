@@ -34,13 +34,14 @@ jobs:
 
     steps:
       - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-        run: |
-          git fetch --prune --unshallow --tags
 
       - name: debug-checkout
         run: |
+          git tag --list
+          git fetch --prune --unshallow --tags
           git tag --list
 
       - name: Log in to the Container registry
