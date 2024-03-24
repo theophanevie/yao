@@ -4,7 +4,7 @@ Metaverse implementation of the most amazing dog !
 
 # Patch note
 
-## 1.1.1
+## 1.1.1 - 1.1.2
 
 - Test argocd image updater
 
