@@ -18,8 +18,6 @@ spec:
     metadata:
       labels:
         app: yao
-{{/*      annotations: TODO: fix with argo diff */}}
-{{/*        rollme: {{ randAlphaNum 5 | quote }}*/}}
     spec:
       containers:
         - name: yao
