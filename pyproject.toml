@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "yao"
-version = "1.1.4"
+version = "1.1.5"
 description = "An implementation coming right from metaverse of the most amazing dog"
 authors = ["THhéophane Vié <theophane.vie@petit-nuage.org>"]
 
